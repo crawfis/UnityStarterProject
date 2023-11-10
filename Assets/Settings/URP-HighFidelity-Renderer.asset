@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4839761566566784339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1614fc811f8f184697d9bee70ab9fe5, type: 3}
+  m_Name: DecalRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_Settings:
+    technique: 0
+    maxDrawDistance: 1000
+    decalLayers: 0
+    dBufferSettings:
+      surfaceData: 2
+    screenSpaceSettings:
+      normalBlend: 0
+  m_CopyDepthPS: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
+  m_DBufferClear: {fileID: 4800000, guid: f056d8bd2a1c7e44e9729144b4c70395, type: 3}
+--- !u!114 &-4003850880977357351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473a86c9e274347dfbdde619584cebe9, type: 3}
+  m_Name: HighlightPlusRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  renderPassEvent: 500
+  clearStencil: 0
+  previewInEditMode: 1
+  showInPreviewCamera: 1
+--- !u!114 &-1731411246672272536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052a0051f28380a49905d797cf6fd45d, type: 3}
+  m_Name: MKToonPerObjectOutlines
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18,7 +74,13 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: 8703478753048186655}
-  m_RendererFeatureMap: 1fcf9819d0f7c878
+  - {fileID: -4839761566566784339}
+  - {fileID: -4003850880977357351}
+  - {fileID: 7007214307314198340}
+  - {fileID: -1731411246672272536}
+  - {fileID: 6990215209073126248}
+  - {fileID: 6121378976723040564}
+  m_RendererFeatureMap: 1fcf9819d0f7c878ade232537fb6d5bcd9b5b549d6766fc844677f6449a03e6168a3fb01a5caf8e7682b5668b23b026134f91e33bf81f354
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -61,6 +123,120 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &6121378976723040564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32e72b6a3f58a24c9033e2b9275eea0, type: 3}
+  m_Name: ScreenSpaceShadows
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  m_Shader: {fileID: 4800000, guid: 0f854b35a0cf61a429bd5dcfea30eddd, type: 3}
+--- !u!114 &6990215209073126248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: FullScreenPassRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  passMaterial: {fileID: 2100000, guid: 78a08787ca30045abb69f6f7dd878e09, type: 2}
+  injectionPoint: 600
+  requirements: 4
+  passIndex: 0
+--- !u!114 &7007214307314198340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7f813b992430245ad61f09b0473d9f, type: 3}
+  m_Name: MKGlow
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  showEditorMainBehavior: 1
+  showEditorBloomBehavior: 0
+  showEditorLensSurfaceBehavior: 0
+  showEditorLensFlareBehavior: 0
+  showEditorGlareBehavior: 0
+  workmode: 0
+  allowGeometryShaders: 1
+  allowComputeShaders: 1
+  renderPriority: 1
+  debugView: 0
+  quality: 2
+  antiFlickerMode: 0
+  workflow: 0
+  selectiveRenderLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  anamorphicRatio: 0
+  lumaScale: 0.5
+  blooming: 0
+  bloomThreshold:
+    minValue: 1.25
+    maxValue: 10
+  bloomScattering: 7
+  bloomIntensity: 1
+  allowLensSurface: 0
+  lensSurfaceDirtTexture: {fileID: 0}
+  lensSurfaceDirtIntensity: 2.5
+  lensSurfaceDiffractionTexture: {fileID: 0}
+  lensSurfaceDiffractionIntensity: 2
+  allowLensFlare: 0
+  lensFlareStyle: 1
+  lensFlareGhostFade: 10
+  lensFlareGhostIntensity: 1
+  lensFlareThreshold:
+    minValue: 1.3
+    maxValue: 10
+  lensFlareScattering: 5
+  lensFlareColorRamp: {fileID: 0}
+  lensFlareChromaticAberration: 53
+  lensFlareGhostCount: 3
+  lensFlareGhostDispersal: 0.6
+  lensFlareHaloFade: 2
+  lensFlareHaloIntensity: 1
+  lensFlareHaloSize: 0.4
+  allowGlare: 0
+  glareBlend: 0.33
+  glareIntensity: 1
+  glareAngle: 0
+  glareThreshold:
+    minValue: 1.25
+    maxValue: 10
+  glareStreaks: 4
+  glareStyle: 4
+  glareScattering: 2
+  glareSample0Scattering: 5
+  glareSample0Angle: 0
+  glareSample0Intensity: 1
+  glareSample0Offset: 0
+  glareSample1Scattering: 5
+  glareSample1Angle: 45
+  glareSample1Intensity: 1
+  glareSample1Offset: 0
+  glareSample2Scattering: 5
+  glareSample2Angle: 90
+  glareSample2Intensity: 1
+  glareSample2Offset: 0
+  glareSample3Scattering: 5
+  glareSample3Angle: 135
+  glareSample3Intensity: 1
+  glareSample3Offset: 0
 --- !u!114 &8703478753048186655
 MonoBehaviour:
   m_ObjectHideFlags: 0
