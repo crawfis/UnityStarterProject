@@ -1,10 +1,12 @@
-﻿using UnityEditor;
+﻿#define LoadScene0OnPlay
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace CrawfisSoftware.Unity3D.Utility
 {
+#if LoadScene0OnPlay
     /// <summary>
     /// This script overrides the default behavior when pressing Play to mimic it as if you loaded the first scene in the Build index and then hit Play.
     /// It is useful when you have a "bootstrap" scene or need to always load the Main Menu first.
@@ -44,4 +46,5 @@ namespace CrawfisSoftware.Unity3D.Utility
             }
         }
     }
+#endif
 }

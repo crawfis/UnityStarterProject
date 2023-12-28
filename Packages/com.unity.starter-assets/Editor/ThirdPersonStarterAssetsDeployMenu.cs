@@ -8,18 +8,22 @@ namespace StarterAssets
 {
     public partial class StarterAssetsDeployMenu : ScriptableObject
     {
+        private static GameObject _currentPlayer = null;
         // prefab paths
         private const string PlayerArmaturePrefabName = "PlayerArmature";
-
+        [MenuItem(MenuRoot + "/Set Current Player to null", false)]
+        static void SetCurrentPlayerToNull()
+        {
+            _currentPlayer = null;
+        }
         /// <summary>
         /// Check the Armature, main camera, cinemachine virtual camera, camera target and references
         /// </summary>
         [MenuItem(MenuRoot + "/Reset Third Person Controller Armature", false)]
         static void ResetThirdPersonControllerArmature()
         {
-            var thirdPersonControllers = FindObjectsOfType<ThirdPersonController>();
-            var player = thirdPersonControllers.FirstOrDefault(controller =>
-                controller.GetComponent<Animator>() && controller.CompareTag(PlayerTag));
+            var thirdPersonControllers = FindObjectsByType<ThirdPersonController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var player = thirdPersonControllers.FirstOrDefault(controller => (controller.GetComponent<Animator>() != null) && controller.CompareTag(PlayerTag));
 
             GameObject playerGameObject = null;
 
@@ -39,7 +43,9 @@ namespace StarterAssets
             {
                 playerGameObject = player.gameObject;
             }
-
+            _currentPlayer?.SetActive(false);
+            _currentPlayer = playerGameObject;
+            _currentPlayer.SetActive(true);
             if (playerGameObject != null)
             {
                 // cameras
@@ -50,9 +56,8 @@ namespace StarterAssets
         [MenuItem(MenuRoot + "/Reset Third Person Controller Capsule", false)]
         static void ResetThirdPersonControllerCapsule()
         {
-            var thirdPersonControllers = FindObjectsOfType<ThirdPersonController>();
-            var player = thirdPersonControllers.FirstOrDefault(controller =>
-                !controller.GetComponent<Animator>() && controller.CompareTag(PlayerTag));
+            var thirdPersonControllers = FindObjectsByType<ThirdPersonController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var player = thirdPersonControllers.FirstOrDefault(controller => (controller.GetComponent<Animator>() == null) && controller.CompareTag(PlayerTag));
 
             GameObject playerGameObject = null;
 
@@ -72,6 +77,9 @@ namespace StarterAssets
             {
                 playerGameObject = player.gameObject;
             }
+            _currentPlayer?.SetActive(false);
+            _currentPlayer = playerGameObject;
+            _currentPlayer.SetActive(true);
 
             if (playerGameObject != null)
             {
