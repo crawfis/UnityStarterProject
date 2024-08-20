@@ -1,16 +1,20 @@
 ﻿using UnityEditor;
+
 using UnityEngine;
 
-namespace HighlightPlus {
+namespace HighlightPlus
+{
     [CustomEditor(typeof(HighlightTrigger))]
-    public class HighlightTriggerEditor : Editor {
+    public class HighlightTriggerEditor : UnityEditor.Editor
+    {
 
         SerializedProperty highlightOnHover, triggerMode, raycastCamera, raycastSource, raycastLayerMask;
         SerializedProperty minDistance, maxDistance, respectUI, volumeLayerMask;
         SerializedProperty selectOnClick, selectedProfile, selectedAndHighlightedProfile, singleSelection, toggleOnClick, keepSelection;
         HighlightTrigger trigger;
 
-        void OnEnable() {
+        void OnEnable()
+        {
             highlightOnHover = serializedObject.FindProperty("highlightOnHover");
             triggerMode = serializedObject.FindProperty("triggerMode");
             raycastCamera = serializedObject.FindProperty("raycastCamera");
@@ -30,27 +34,35 @@ namespace HighlightPlus {
             trigger.Init();
         }
 
-        public override void OnInspectorGUI() {
+        public override void OnInspectorGUI()
+        {
 
-			serializedObject.Update ();
+            serializedObject.Update();
 
-			if (trigger.triggerMode == TriggerMode.RaycastOnThisObjectAndChildren) {
-                if (!trigger.hasColliders && !trigger.hasColliders2D) {
-					EditorGUILayout.HelpBox ("No collider found on this object or any of its children. Add colliders to allow automatic highlighting.", MessageType.Warning);
-				}
-            } else {
+            if (trigger.triggerMode == TriggerMode.RaycastOnThisObjectAndChildren)
+            {
+                if (!trigger.hasColliders && !trigger.hasColliders2D)
+                {
+                    EditorGUILayout.HelpBox("No collider found on this object or any of its children. Add colliders to allow automatic highlighting.", MessageType.Warning);
+                }
+            }
+            else
+            {
 #if ENABLE_INPUT_SYSTEM
-                if (trigger.triggerMode == TriggerMode.ColliderEventsOnlyOnThisObject) {
+                if (trigger.triggerMode == TriggerMode.ColliderEventsOnlyOnThisObject)
+                {
                     EditorGUILayout.HelpBox("This trigger mode is not compatible with the new input system.", MessageType.Error);
                 }
 #endif
-                if (trigger.GetComponent<Collider>() == null && trigger.GetComponent<Collider2D>() == null) {
-					EditorGUILayout.HelpBox ("No collider found on this object. Add a collider to allow automatic highlighting.", MessageType.Error);
+                if (trigger.GetComponent<Collider>() == null && trigger.GetComponent<Collider2D>() == null)
+                {
+                    EditorGUILayout.HelpBox("No collider found on this object. Add a collider to allow automatic highlighting.", MessageType.Error);
                 }
             }
 
             EditorGUILayout.PropertyField(triggerMode);
-            switch (trigger.triggerMode) {
+            switch (trigger.triggerMode)
+            {
                 case TriggerMode.RaycastOnThisObjectAndChildren:
                     EditorGUI.indentLevel++;
                     EditorGUILayout.PropertyField(raycastCamera);
@@ -67,25 +79,31 @@ namespace HighlightPlus {
                     break;
             }
 
-            if (trigger.triggerMode != TriggerMode.Volume) {
+            if (trigger.triggerMode != TriggerMode.Volume)
+            {
                 EditorGUILayout.PropertyField(respectUI);
             }
             EditorGUILayout.PropertyField(highlightOnHover);
             EditorGUILayout.PropertyField(selectOnClick);
-            if (selectOnClick.boolValue) {
+            if (selectOnClick.boolValue)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(selectedProfile);
                 EditorGUILayout.PropertyField(selectedAndHighlightedProfile);
                 EditorGUILayout.PropertyField(singleSelection);
                 EditorGUILayout.PropertyField(toggleOnClick);
-                if (trigger.triggerMode == TriggerMode.RaycastOnThisObjectAndChildren) {
+                if (trigger.triggerMode == TriggerMode.RaycastOnThisObjectAndChildren)
+                {
                     EditorGUI.BeginChangeCheck();
                     EditorGUILayout.PropertyField(keepSelection);
-                    if (EditorGUI.EndChangeCheck()) {
+                    if (EditorGUI.EndChangeCheck())
+                    {
                         // Update all triggers
                         HighlightTrigger[] triggers = FindObjectsOfType<HighlightTrigger>();
-                        foreach(HighlightTrigger t in triggers) {
-                            if (t.keepSelection != keepSelection.boolValue) {
+                        foreach (HighlightTrigger t in triggers)
+                        {
+                            if (t.keepSelection != keepSelection.boolValue)
+                            {
                                 t.keepSelection = keepSelection.boolValue;
                                 EditorUtility.SetDirty(t);
                             }
@@ -95,7 +113,8 @@ namespace HighlightPlus {
                 EditorGUI.indentLevel--;
             }
 
-            if (serializedObject.ApplyModifiedProperties()) {
+            if (serializedObject.ApplyModifiedProperties())
+            {
                 trigger.Init();
             }
         }

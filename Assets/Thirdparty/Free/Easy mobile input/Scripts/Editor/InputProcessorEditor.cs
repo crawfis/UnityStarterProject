@@ -8,12 +8,12 @@ using System.Collections.Generic;
 namespace EasyMobileInput
 {
     [CustomEditor(typeof(BaseInputProcessor), true)]
-    public class InputProcessorEditor : Editor
+    public class InputProcessorEditor : UnityEditor.Editor
     {
         private static bool shouldDraw = false;
 
         private static Dictionary<BaseInputProcessor, float> drawTime = new Dictionary<BaseInputProcessor, float>();
-        
+
         public override void OnInspectorGUI()
         {
         }

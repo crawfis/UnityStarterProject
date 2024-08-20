@@ -11,10 +11,10 @@ using UnityEditor.SceneManagement;
 namespace EasyMobileInput
 {
     [CustomEditor(typeof(BaseInputElement), true)]
-    public class InputElementEditor : Editor
+    public class InputElementEditor : UnityEditor.Editor
     {
         private ReorderableList list = null;
-        
+
         public override bool RequiresConstantRepaint()
         {
             return true;
@@ -69,7 +69,7 @@ namespace EasyMobileInput
                                 menu.AddItem(new GUIContent(GetDecorativeName(type)), false, () =>
                                     {
                                         var instance = (target as BaseInputElement).TryAddProcessor(cachedType);
-                                        
+
                                         var guid = string.Empty;
                                         var id = 0L;
                                         var nearestRoot = PrefabUtility.GetNearestPrefabInstanceRoot((target as Component).gameObject);
@@ -100,13 +100,13 @@ namespace EasyMobileInput
                     {
                         if (index >= list.list.Count)
                             return 0.0f;
-                        
-                        Editor editor = null;
+
+                        UnityEditor.Editor editor = null;
                         var processor = list.list[index] as BaseInputProcessor;
                         if (processor == null)
                             return 0.0f;
 
-                        Editor.CreateCachedEditor(processor, null, ref editor);
+                        UnityEditor.Editor.CreateCachedEditor(processor, null, ref editor);
 
                         editor.serializedObject.Update();
                         return (editor as InputProcessorEditor).GetHeight();
@@ -114,12 +114,12 @@ namespace EasyMobileInput
 
                 list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                     {
-                        Editor editor = null;
+                        UnityEditor.Editor editor = null;
                         var processor = list.list[index] as BaseInputProcessor;
                         if (processor == null)
                             return;
 
-                        Editor.CreateCachedEditor(processor, null, ref editor);
+                        UnityEditor.Editor.CreateCachedEditor(processor, null, ref editor);
 
                         var fullSpacing = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
@@ -142,7 +142,7 @@ namespace EasyMobileInput
         {
 
         }
-        
+
         public override void OnInspectorGUI()
         {
             OnBeforeBasicProperties();

@@ -1,11 +1,14 @@
 ﻿using UnityEditor;
+
 using UnityEngine;
 
-namespace HighlightPlus {
+namespace HighlightPlus
+{
 
     [CustomEditor(typeof(HighlightProfile))]
     [CanEditMultipleObjects]
-    public class HighlightProfileEditor : Editor {
+    public class HighlightProfileEditor : UnityEditor.Editor
+    {
 
         SerializedProperty effectGroup, effectGroupLayer, effectNameFilter, combineMeshes, alphaCutOff, cullBackFaces;
         SerializedProperty overlay, overlayMode, overlayColor, overlayAnimationSpeed, overlayMinIntensity, overlayTexture, overlayTextureScale, overlayTextureUVSpace, overlayBlending, overlayVisibility;
@@ -22,7 +25,8 @@ namespace HighlightPlus {
         SerializedProperty hitFxInitialIntensity, hitFxMode, hitFxFadeOutDuration, hitFxColor, hitFxRadius;
         SerializedProperty cameraDistanceFade, cameraDistanceFadeNear, cameraDistanceFadeFar;
 
-        void OnEnable() {
+        void OnEnable()
+        {
             effectGroup = serializedObject.FindProperty("effectGroup");
             effectGroupLayer = serializedObject.FindProperty("effectGroupLayer");
             effectNameFilter = serializedObject.FindProperty("effectNameFilter");
@@ -124,19 +128,22 @@ namespace HighlightPlus {
             cameraDistanceFadeFar = serializedObject.FindProperty("cameraDistanceFadeFar");
         }
 
-        public override void OnInspectorGUI() {
+        public override void OnInspectorGUI()
+        {
 
             serializedObject.Update();
 
             EditorGUILayout.Separator();
             EditorGUILayout.LabelField("Highlight Options", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(effectGroup, new GUIContent("Include"));
-            if (effectGroup.intValue == (int)TargetOptions.LayerInScene || effectGroup.intValue == (int)TargetOptions.LayerInChildren) {
+            if (effectGroup.intValue == (int)TargetOptions.LayerInScene || effectGroup.intValue == (int)TargetOptions.LayerInChildren)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(effectGroupLayer, new GUIContent("Layer"));
                 EditorGUI.indentLevel--;
             }
-            if (effectGroup.intValue != (int)TargetOptions.OnlyThisObject && effectGroup.intValue != (int)TargetOptions.Scripting) {
+            if (effectGroup.intValue != (int)TargetOptions.OnlyThisObject && effectGroup.intValue != (int)TargetOptions.Scripting)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(effectNameFilter, new GUIContent("Object Name Filter"));
                 EditorGUILayout.PropertyField(combineMeshes);
@@ -148,7 +155,8 @@ namespace HighlightPlus {
             EditorGUILayout.PropertyField(fadeInDuration);
             EditorGUILayout.PropertyField(fadeOutDuration);
             EditorGUILayout.PropertyField(cameraDistanceFade);
-            if (cameraDistanceFade.boolValue) {
+            if (cameraDistanceFade.boolValue)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(cameraDistanceFadeNear, new GUIContent("Near Distance"));
                 EditorGUILayout.PropertyField(cameraDistanceFadeFar, new GUIContent("Far Distance"));
@@ -162,22 +170,28 @@ namespace HighlightPlus {
 
             EditorGUILayout.BeginVertical(GUI.skin.box);
             DrawSectionField(outline, "Outline", outline.floatValue > 0);
-            if (outline.floatValue > 0) {
+            if (outline.floatValue > 0)
+            {
                 EditorGUI.indentLevel++;
                 HighlightEffectEditor.QualityPropertyField(outlineQuality);
-                if (outlineQuality.intValue == (int)QualityLevel.Highest) {
+                if (outlineQuality.intValue == (int)QualityLevel.Highest)
+                {
                     EditorGUILayout.PropertyField(outlineEdgeMode, new GUIContent("Edges"));
-                    if (outlineEdgeMode.intValue == (int)OutlineEdgeMode.Any) {
+                    if (outlineEdgeMode.intValue == (int)OutlineEdgeMode.Any)
+                    {
                         EditorGUILayout.PropertyField(outlineEdgeThreshold, new GUIContent("Edge Detection Threshold"));
                     }
                     EditorGUILayout.PropertyField(outlineContourStyle, new GUIContent("Contour Style"));
                     EditorGUILayout.PropertyField(outlineWidth, new GUIContent("Width"));
                     EditorGUILayout.PropertyField(outlineColor, new GUIContent("Color"));
                     EditorGUILayout.PropertyField(outlineBlurPasses, new GUIContent("Blur Passes"));
-                } else {
+                }
+                else
+                {
                     EditorGUILayout.PropertyField(outlineWidth, new GUIContent("Width"));
                     EditorGUILayout.PropertyField(outlineColorStyle, new GUIContent("Color Style"));
-                    switch ((ColorStyle)outlineColorStyle.intValue) {
+                    switch ((ColorStyle)outlineColorStyle.intValue)
+                    {
                         case ColorStyle.SingleColor:
                             EditorGUILayout.PropertyField(outlineColor, new GUIContent("Color"));
                             break;
@@ -189,12 +203,16 @@ namespace HighlightPlus {
                             break;
                     }
                 }
-                if (outlineQuality.intValue == (int)QualityLevel.Highest && outlineEdgeMode.intValue != (int)OutlineEdgeMode.Any) {
+                if (outlineQuality.intValue == (int)QualityLevel.Highest && outlineEdgeMode.intValue != (int)OutlineEdgeMode.Any)
+                {
                     EditorGUILayout.PropertyField(outlineDownsampling, new GUIContent("Downsampling"));
                 }
-                if (outlineQuality.intValue == (int)QualityLevel.Highest && glowQuality.intValue == (int)QualityLevel.Highest) {
+                if (outlineQuality.intValue == (int)QualityLevel.Highest && glowQuality.intValue == (int)QualityLevel.Highest)
+                {
                     EditorGUILayout.PropertyField(glowVisibility, new GUIContent("Visibility"));
-                } else {
+                }
+                else
+                {
                     EditorGUILayout.PropertyField(outlineVisibility, new GUIContent("Visibility"));
                 }
                 EditorGUILayout.PropertyField(outlineMaskMode, new GUIContent("Mask Mode"));
@@ -204,25 +222,31 @@ namespace HighlightPlus {
 
             EditorGUILayout.BeginVertical(GUI.skin.box);
             DrawSectionField(glow, "Outer Glow", glow.floatValue > 0);
-            if (glow.floatValue > 0) {
+            if (glow.floatValue > 0)
+            {
                 EditorGUI.indentLevel++;
                 HighlightEffectEditor.QualityPropertyField(glowQuality);
-                if (glowQuality.intValue == (int)QualityLevel.Highest) {
+                if (glowQuality.intValue == (int)QualityLevel.Highest)
+                {
                     EditorGUILayout.PropertyField(outlineContourStyle, new GUIContent("Contour Style"));
                     EditorGUILayout.PropertyField(glowWidth, new GUIContent("Width"));
                     EditorGUILayout.PropertyField(glowHQColor, new GUIContent("Color"));
                     EditorGUILayout.PropertyField(glowBlurMethod, new GUIContent("Blur Method", "Gaussian: better quality. Kawase: faster."));
                     EditorGUILayout.PropertyField(glowDownsampling, new GUIContent("Downsampling"));
-                } else {
+                }
+                else
+                {
                     EditorGUILayout.PropertyField(glowWidth, new GUIContent("Width"));
                 }
                 EditorGUILayout.PropertyField(glowAnimationSpeed, new GUIContent("Animation Speed"));
                 EditorGUILayout.PropertyField(glowVisibility, new GUIContent("Visibility"));
                 EditorGUILayout.PropertyField(glowMaskMode, new GUIContent("Mask Mode"));
                 EditorGUILayout.PropertyField(glowBlendMode, new GUIContent("Blend Mode"));
-                if (glowQuality.intValue != (int)QualityLevel.Highest) {
+                if (glowQuality.intValue != (int)QualityLevel.Highest)
+                {
                     EditorGUILayout.PropertyField(glowDithering, new GUIContent("Dithering"));
-                    if (glowDithering.boolValue) {
+                    if (glowDithering.boolValue)
+                    {
                         EditorGUI.indentLevel++;
                         EditorGUILayout.PropertyField(glowMagicNumber1, new GUIContent("Magic Number 1"));
                         EditorGUILayout.PropertyField(glowMagicNumber2, new GUIContent("Magic Number 2"));
@@ -237,7 +261,8 @@ namespace HighlightPlus {
 
             EditorGUILayout.BeginVertical(GUI.skin.box);
             DrawSectionField(innerGlow, "Inner Glow", innerGlow.floatValue > 0);
-            if (innerGlow.floatValue > 0) {
+            if (innerGlow.floatValue > 0)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(innerGlowColor, new GUIContent("Color"));
                 EditorGUILayout.PropertyField(innerGlowWidth, new GUIContent("Width"));
@@ -249,12 +274,14 @@ namespace HighlightPlus {
 
             EditorGUILayout.BeginVertical(GUI.skin.box);
             DrawSectionField(overlay, "Overlay", overlay.floatValue > 0);
-            if (overlay.floatValue > 0) {
+            if (overlay.floatValue > 0)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(overlayMode, new GUIContent("Mode"));
                 EditorGUILayout.PropertyField(overlayColor, new GUIContent("Color"));
                 EditorGUILayout.PropertyField(overlayTexture, new GUIContent("Texture"));
-                if (overlayTexture.objectReferenceValue != null) {
+                if (overlayTexture.objectReferenceValue != null)
+                {
                     EditorGUI.indentLevel++;
                     EditorGUILayout.PropertyField(overlayTextureUVSpace, new GUIContent("UV Space"));
                     EditorGUILayout.PropertyField(overlayTextureScale, new GUIContent("Texture Scale"));
@@ -270,7 +297,8 @@ namespace HighlightPlus {
 
             EditorGUILayout.BeginVertical(GUI.skin.box);
             DrawSectionField(targetFX, "Target", targetFX.boolValue);
-            if (targetFX.boolValue) {
+            if (targetFX.boolValue)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(targetFXTexture, new GUIContent("Texture"));
                 EditorGUILayout.PropertyField(targetFXColor, new GUIContent("Color"));
@@ -279,7 +307,8 @@ namespace HighlightPlus {
                 EditorGUILayout.PropertyField(targetFXEndScale, new GUIContent("End Scale"));
                 EditorGUILayout.PropertyField(targetFXScaleToRenderBounds, new GUIContent("Scale To Object Bounds"));
                 EditorGUILayout.PropertyField(targetFXAlignToGround, new GUIContent("Align To Ground"));
-                if (targetFXAlignToGround.boolValue) {
+                if (targetFXAlignToGround.boolValue)
+                {
                     EditorGUI.indentLevel++;
                     EditorGUILayout.PropertyField(targetFXGroundMaxDistance, new GUIContent("Ground Max Distance"));
                     EditorGUILayout.PropertyField(targetFXGroundLayerMask, new GUIContent("Ground Layer Mask"));
@@ -295,10 +324,12 @@ namespace HighlightPlus {
 
             EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUILayout.PropertyField(seeThrough);
-            if (seeThrough.intValue != (int)SeeThroughMode.Never) {
+            if (seeThrough.intValue != (int)SeeThroughMode.Never)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(seeThroughOccluderMask, new GUIContent("Occluder Layer"));
-                if (seeThroughOccluderMask.intValue > 0) {
+                if (seeThroughOccluderMask.intValue > 0)
+                {
                     EditorGUI.indentLevel++;
                     EditorGUILayout.PropertyField(seeThroughOccluderMaskAccurate, new GUIContent("Accurate"));
                     EditorGUILayout.PropertyField(seeThroughOccluderThreshold, new GUIContent("Radius Threshold", "Multiplier to the object bounds. Making the bounds smaller prevents false occlusion tests."));
@@ -313,12 +344,14 @@ namespace HighlightPlus {
                 EditorGUILayout.PropertyField(seeThroughTintAlpha, new GUIContent("Color Blend"));
                 EditorGUILayout.PropertyField(seeThroughNoise, new GUIContent("Noise"));
                 EditorGUILayout.PropertyField(seeThroughTexture, new GUIContent("Texture"));
-                if (seeThroughTexture.objectReferenceValue != null) {
+                if (seeThroughTexture.objectReferenceValue != null)
+                {
                     EditorGUILayout.PropertyField(seeThroughTextureUVSpace, new GUIContent("UV Space"));
                     EditorGUILayout.PropertyField(seeThroughTextureScale, new GUIContent("Texture Scale"));
                 }
                 EditorGUILayout.PropertyField(seeThroughBorder, new GUIContent("Border When Hidden"));
-                if (seeThroughBorder.floatValue > 0) {
+                if (seeThroughBorder.floatValue > 0)
+                {
                     EditorGUI.indentLevel++;
                     EditorGUILayout.PropertyField(seeThroughBorderWidth, new GUIContent("Width"));
                     EditorGUILayout.PropertyField(seeThroughBorderColor, new GUIContent("Color"));
@@ -334,13 +367,15 @@ namespace HighlightPlus {
 
             EditorGUILayout.BeginVertical(GUI.skin.box);
             DrawSectionField(hitFxInitialIntensity, "Hit FX", hitFxInitialIntensity.floatValue > 0);
-            if (hitFxInitialIntensity.floatValue > 0) {
+            if (hitFxInitialIntensity.floatValue > 0)
+            {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(hitFxInitialIntensity, new GUIContent("Initial Intensity"));
                 EditorGUILayout.PropertyField(hitFxMode, new GUIContent("Mode"));
                 EditorGUILayout.PropertyField(hitFxFadeOutDuration, new GUIContent("Fade Out Duration"));
                 EditorGUILayout.PropertyField(hitFxColor, new GUIContent("Color"));
-                if ((HitFxMode)hitFxMode.intValue == HitFxMode.LocalHit) {
+                if ((HitFxMode)hitFxMode.intValue == HitFxMode.LocalHit)
+                {
                     EditorGUILayout.PropertyField(hitFxRadius, new GUIContent("Radius"));
                 }
                 EditorGUI.indentLevel--;
@@ -348,14 +383,18 @@ namespace HighlightPlus {
             EditorGUILayout.EndVertical();
 
             if (serializedObject.ApplyModifiedProperties() || (Event.current.type == EventType.ValidateCommand &&
-                Event.current.commandName == "UndoRedoPerformed")) {
+                Event.current.commandName == "UndoRedoPerformed"))
+            {
 
                 // Triggers profile reload on all Highlight Effect scripts
                 HighlightEffect[] effects = FindObjectsOfType<HighlightEffect>();
-                for (int t = 0; t < targets.Length; t++) {
+                for (int t = 0; t < targets.Length; t++)
+                {
                     HighlightProfile profile = (HighlightProfile)targets[t];
-                    for (int k = 0; k < effects.Length; k++) {
-                        if (effects[k] != null && effects[k].profile == profile && effects[k].profileSync) {
+                    for (int k = 0; k < effects.Length; k++)
+                    {
+                        if (effects[k] != null && effects[k].profile == profile && effects[k].profileSync)
+                        {
                             profile.Load(effects[k]);
                             effects[k].Refresh();
                         }
@@ -366,7 +405,8 @@ namespace HighlightPlus {
 
         }
 
-        void DrawSectionField(SerializedProperty property, string label, bool active) {
+        void DrawSectionField(SerializedProperty property, string label, bool active)
+        {
             EditorGUILayout.PropertyField(property, new GUIContent(active ? label + " •" : label));
         }
 
