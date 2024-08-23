@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 20b88a9b89fa73e4b99cdd06876fea21
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 283787
+  packageName: Inspector Comments
+  packageVersion: 1.0.0
+  assetPath: Assets/LombaxGuy/InspectorComments/Documentation/Inspector Comments
+    - Documentation.pdf
+  uploadId: 664087

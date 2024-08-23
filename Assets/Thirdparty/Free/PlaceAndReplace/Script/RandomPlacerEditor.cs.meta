@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9a6aade779bd67440a703bcf0e99c4df
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 256589
+  packageName: Place and Replace
+  packageVersion: 1.0.0
+  assetPath: Assets/PlaceAndReplace/Script/RandomPlacerEditor.cs
+  uploadId: 589212

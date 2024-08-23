@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/ColorPaletterV2 (v1.4.0)/Examples/Standard/ExampleScene.unity
     guid: 50b405c09e5091a428eb486778058f86
-  - enabled: 1
+  - enabled: 0
     path: Assets/Input Prompt Display/Example/Scenes/Example.unity
     guid: 25364ff923b7523498c3eb6c9c9b2a57
   m_configObjects:
@@ -16,3 +16,4 @@ EditorBuildSettings:
       type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}
+  m_UseUCBPForAssetBundles: 0

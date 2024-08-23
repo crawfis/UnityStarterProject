@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 622667bf10395b14584eb3f3ea285ee1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 290565
+  packageName: Material Finder
+  packageVersion: 1.0
+  assetPath: Assets/CoreStrandTools/MaterialFinder/Script/MaterialFinder.cs
+  uploadId: 678192

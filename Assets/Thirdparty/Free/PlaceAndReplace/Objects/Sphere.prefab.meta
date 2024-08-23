@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3f861cb3c8d458142b0261a2cd1d3cca
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 256589
+  packageName: Place and Replace
+  packageVersion: 1.0.0
+  assetPath: Assets/PlaceAndReplace/Objects/Sphere.prefab
+  uploadId: 589212

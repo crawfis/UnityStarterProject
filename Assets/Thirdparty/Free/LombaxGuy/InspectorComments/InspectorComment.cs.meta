@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 06107e20dff8bfe499a72f227b6bae17
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 283787
+  packageName: Inspector Comments
+  packageVersion: 1.0.0
+  assetPath: Assets/LombaxGuy/InspectorComments/InspectorComment.cs
+  uploadId: 664087

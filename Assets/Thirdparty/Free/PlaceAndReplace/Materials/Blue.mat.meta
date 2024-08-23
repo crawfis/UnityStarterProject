@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 07e316e7af85eb248b7c0ce4c33ee929
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 256589
+  packageName: Place and Replace
+  packageVersion: 1.0.0
+  assetPath: Assets/PlaceAndReplace/Materials/Blue.mat
+  uploadId: 589212

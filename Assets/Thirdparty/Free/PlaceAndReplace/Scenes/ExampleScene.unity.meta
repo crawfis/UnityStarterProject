@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 78ff695f9ee59364ab8a0d7690f99c84
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 256589
+  packageName: Place and Replace
+  packageVersion: 1.0.0
+  assetPath: Assets/PlaceAndReplace/Scenes/ExampleScene.unity
+  uploadId: 589212

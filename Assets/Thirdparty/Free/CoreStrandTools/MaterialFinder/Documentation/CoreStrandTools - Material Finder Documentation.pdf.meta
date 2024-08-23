@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ab78579896601384080dd65ce5dbc0c8
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 290565
+  packageName: Material Finder
+  packageVersion: 1.0
+  assetPath: Assets/CoreStrandTools/MaterialFinder/Documentation/CoreStrandTools
+    - Material Finder Documentation.pdf
+  uploadId: 678192

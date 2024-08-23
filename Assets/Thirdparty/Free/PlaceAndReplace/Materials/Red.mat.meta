@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 42bee53b6320f494b942e4dc042cf7fe
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 256589
+  packageName: Place and Replace
+  packageVersion: 1.0.0
+  assetPath: Assets/PlaceAndReplace/Materials/Red.mat
+  uploadId: 589212
