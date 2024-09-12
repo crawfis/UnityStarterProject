@@ -7,7 +7,7 @@ namespace CrawfisSoftware.EditorUtil
 {
     /// <summary>
     /// This script overrides the default behavior when pressing Play to mimic it as if you loaded the first scene in the Build index and then hit Play.
-    /// It is useful when you have a "bootstrap" scene or need to always load the Main Menu first.
+    /// It is useful when you have a "bootstrap" scene or need to always load the Main Menu first. It can be toggled on or off with a menu setting.
     /// </summary>
     public static class EditorPlayBootStrapScene
     {
@@ -19,15 +19,7 @@ namespace CrawfisSoftware.EditorUtil
         [InitializeOnLoadMethod]
         private static void OnLoad()
         {
-            if (!_isEnabled) return;
-            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
-
-            // Ensure at least one build scene exist.
-            if (EditorBuildSettings.scenes.Length == 0)
-                return;
-
-            // SetProperties Play Mode scene to first scene defined in build settings.
-            EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
+            EditorSceneManager.activeSceneChangedInEditMode += SetStartScene;
         }
         #region Constructor
         static EditorPlayBootStrapScene()
@@ -51,15 +43,7 @@ namespace CrawfisSoftware.EditorUtil
             // shows whether the tool is enabled or disabled
             Menu.SetChecked(BOOTSTRAP_MENU_ITEM, _isEnabled);
 
-            // Set the start scene
-            if (_isEnabled)
-            {
-                EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
-            }
-            else
-            {
-                EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneManager.GetActiveScene().path);
-            }
+            SetStartScene();
         }
 
         private static void OnSetup()
@@ -71,25 +55,31 @@ namespace CrawfisSoftware.EditorUtil
 
             // shows whether the tool is enabled or disabled
             Menu.SetChecked(BOOTSTRAP_MENU_ITEM, _isEnabled);
+            SetStartScene();
         }
-        private static void OnPlayModeStateChanged(PlayModeStateChange state)
+
+        private static void SetStartScene()
         {
-            switch (state)
+            Scene openInEditor = SceneManager.GetActiveScene();
+            if (!_isEnabled || EditorBuildSettings.scenes.Length == 0 || openInEditor.buildIndex == 0)
             {
-                case PlayModeStateChange.ExitingEditMode:
-                    Scene openInEditor = SceneManager.GetActiveScene();
-                    if (!_isEnabled || openInEditor.buildIndex == 0)
-                    {
-                        return;
-                    }
-                    // Save off the current scene so it will be reloaded after the Play session is over.
-                    EditorPrefs.SetString("DefaultScene", openInEditor.name);
-                    /// Debug.Log("SetProperties DefaultScene pref to " + openInEditor.name);
-                    break;
-                case PlayModeStateChange.ExitingPlayMode:
-                    EditorPrefs.SetString("DefaultScene", "");
-                    /// Debug.Log("SetProperties DefaultScene pref to \"\"");
-                    break;
+                EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(openInEditor.path);
+            }
+            else
+            {
+                EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
+            }
+        }
+        private static void SetStartScene(Scene oldScene, Scene newScene)
+        {
+            Scene openInEditor = SceneManager.GetActiveScene();
+            if (!_isEnabled || EditorBuildSettings.scenes.Length == 0 || openInEditor.buildIndex == 0)
+            {
+                EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(openInEditor.path);
+            }
+            else
+            {
+                EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
             }
         }
     }
